@@ -56,8 +56,7 @@ fetch("travel_recommendation_api.json")
     console.error("Error:", error);
 
     if (resultsContainer) {
-      resultsContainer.innerHTML =
-        "<p>There was a problem loading the recommendations.</p>";
+      resultsContainer.innerHTML = "<p>There was a problem loading the recommendations.</p>";
     }
   });
 

@@ -1,124 +1,65 @@
-let recommendations = [];
+let recommendations = []
 
-const resultsContainer = document.getElementById("resultsContainer");
-const searchInput = document.getElementById("searchInput");
-const searchButton = document.getElementById("searchButton");
-const resetButton = document.getElementById("resetButton");
+const resultsContainer = document.getElementById('resultsContainer')
+const searchInput = document.getElementById('searchInput')
+const searchButton = document.getElementById('searchButton')
+const resetButton = document.getElementById('resetButton')
 
-fetch("travel_recommendation_api.json")
-  .then(function (response) {
-    if (!response.ok) {
-      throw new Error("Unable to load JSON data");
-    }
-    return response.json();
-  })
-  .then(function (data) {
-    console.log("JSON data loaded:", data);
-    const countryRecommendations = data.countries.flatMap(function (country) {
-      return country.cities.map(function (city) {
-        return {
-          category: "country",
-          country: country.name,
-          name: city.name,
-          imageUrl: city.imageUrl,
-          description: city.description
-        };
-      });
-    });
-
-    const templeRecommendations = data.temples.map(function (temple) {
-      return {
-        category: "temple",
-        name: temple.name,
-        imageUrl: temple.imageUrl,
-        description: temple.description
-      };
-    });
-
-    const beachRecommendations = data.beaches.map(function (beach) {
-      return {
-        category: "beach",
-        name: beach.name,
-        imageUrl: beach.imageUrl,
-        description: beach.description
-      };
-    });
-
-    recommendations = [
-      ...countryRecommendations,
-      ...templeRecommendations,
-      ...beachRecommendations
-    ];
-
-    console.log("Flattened recommendations:", recommendations);
-  })
-  .catch(function (error) {
-    console.error("Error:", error);
-
-    if (resultsContainer) {
-      resultsContainer.innerHTML = "<p>There was a problem loading the recommendations.</p>";
-    }
-  });
-
-function normalizeKeyword(keyword) {
-  return keyword.trim().toLowerCase();
+if (resultsContainer){
+    fetch('travel_recommendation_api.json')
+    .then(response =>{
+        if (!response.ok) throw new Error("Sorry. We could not load any recommendations")
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+        recommendations = data
+    })
+    .catch (error =>{
+        console.log(error)
+        resultsContainer.innerHTML="<p>Unable to load recommendations</p>"
+    })
 }
 
-function showResults(results) {
-  if (results.length === 0) {
-    resultsContainer.innerHTML =
-      "<p>No recommendations found. Try beach, temple, or country.</p>";
-    return;
-  }
+function normalize(value){
+    return value.trim().toLowerCase()
+}
 
-  resultsContainer.innerHTML = results
-    .map(function (place) {
-      return `
-        <article class="result-card">
-          <img src="${place.imageUrl}" alt="${place.name}">
+function searchRecommendations(){
+    const keyword = normalize(searchInput.value)
+    const aliases = {"beaches":"beaches", "beach":"beaches", "temples":"temples", "temple":"temples", "countries":"countries", "country":"countries"}
+    const category = aliases[keyword]
+    if (!category){
+        resultsContainer.innerHTML = "<p>Plese enter beach, temple or country </p>"
+        return
+    }
+    showResults(recommendations.filter(place => place.category === category))
+}
 
-          <div class="result-card-content">
+function showResults(items){
+    if(!items.length){
+        resultsContainer.innerHTML="<p>No recommendations founds.</p>"
+        return
+    }
+    resultsContainer.innerHTML = items.map(place => `
+    <article class="resultCard">
+        <img src="${place.imageUrl}">
+        <div class="resultCardContent">
             <h3>${place.name}</h3>
             <p>${place.description}</p>
-          </div>
-        </article>
-      `;
-    })
-    .join("");
+            <a href"${place.link}"> Learn More</a>
+        </div>
+    </article>`).join("")
 }
 
-function searchRecommendations() {
-  const keyword = normalizeKeyword(searchInput.value);
-  const keywordMap = {beach: "beach", beaches: "beach", temple: "temple", temples: "temple", country: "country", countries: "country"};
-  const category = keywordMap[keyword];
-  if (!category) {
-    resultsContainer.innerHTML =
-      "<p>Please search for beach, temple, or country.</p>";
-    return;
-  }
-  const filteredResults = recommendations.filter(function (place) {
-    return place.category === category;
-  });
-  showResults(filteredResults);
+
+
+function clearResults(){
+    searchInput.value = ''
+    resultsContainer.innerHTML = ''
 }
 
-function clearResults() {
-  searchInput.value = "";
-  resultsContainer.innerHTML = "";
-}
-
-if (searchButton) {
-  searchButton.addEventListener("click", searchRecommendations);
-}
-
-if (resetButton) {
-  resetButton.addEventListener("click", clearResults);
-}
-
-if (searchInput) {
-  searchInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      searchRecommendations();
-    }
-  });
-}
+if (searchButton) searchButton.addEventListener('click', searchRecommendations)
+if (resetButton) resetButton.addEventListener('click', clearResults)
+if (searchInput) searchInput.addEventListener('keydown', event => {if (event.key ==="Enter")
+searchRecommendations()})

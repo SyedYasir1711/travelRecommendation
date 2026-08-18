@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Travel Recommendation</title>
+        <link rel="stylesheet" href="travel_recommendation.css">
+    </head>
+    <body>
+        <nav class='navbar'>
+            <div class="navLinks">
+                <a class="home" href="travel_recommendation.html">Home</a>
+                <a class="home" href="about.html">About Us</a>
+                <a class="home" href="contact.html">Contact Us</a>
+            </div>
+            <div class="searchArea">
+                <input id="searchInput" type="text" placeholder="Where would you like to go?">
+                <button id="searchButton" type="button">Search</button>
+                <button id="resetButton" type="button">Reset</button>
+            </div>
+        </nav>
+        <main>
+            <section class="hero">
+                <div class="heroContent">
+                    <h1>The World. In your hands.</h1>
+                    <p>Look for your next destination and plan your perfect journey</p>
+                    <a class="primaryLink" href="#results">Explore recommendations</a>
+                </div>
+            </section>
+            <section id="results" class="resultsSection">
+                <h2>Our Recommendations</h2>
+                <div id="resultsContainer" class="resultsGrid"></div>
+              </section>
+        </main>
+        <script src="travel_recommendation.js"></script>
+    </body>
+</html>

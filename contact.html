@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Us</title>
+        <link rel="stylesheet" href="travel_recommendation.css">
+    </head>
+    <body>
+        <nav class='navbar'>
+            <div class="navLinks">
+                <a class="home" href="travel_recommendation.html">Home</a>
+                <a class="home" href="about.html">About Us</a>
+                <a class="home" href="contact.html">Contact Us</a>
+            </div>
+        </nav>
+        <main>
+            <h1>Contact Us</h1>
+            <p> Send us your inquiries</p>
+            <form class="contactForm" onsubmit="event.preventDefault();alert('We will get back to you shortly');this.reset()">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button class="submitButton" type="submit">Submit</button>
+            </form>
+        </main>
+    </body>
+</html>

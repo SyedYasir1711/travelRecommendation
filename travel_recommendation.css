@@ -1,0 +1,28 @@
+body { margin: 0; font-family: Arial, sans-serif; color: #183b56; background: #f5f8fa; line-height: 1.6; }
+.navbar { min-height: 72px; padding: 14px 5%; display: flex; align-items: center; gap: 25px; background: #083b4c; color: white; position: sticky; top: 0; z-index: 10; }
+.navLinks { display: flex; gap: 18px; }
+.navLinks a { color: white; text-decoration: none; }
+.navLinks a:hover { color: #ffd166; }
+.searchArea { margin-left: auto; display: flex; gap: 7px; }
+.searchArea input { width: 230px; padding: 10px; border: 0; border-radius: 5px; }
+button, .primaryLink { border: 0; border-radius: 5px; padding: 10px 15px; cursor: pointer; font-weight: bold; }
+.searchArea button, .submitButton { background: #ffd166; color: #173042; }
+.hero { min-height: 560px; display: flex; align-items: center; padding: 8%; color: white; background: linear-gradient(90deg, rgba(0,30,45,.85), rgba(0,30,45,.2)), url('https://images.stockcake.com/public/b/0/d/b0dc47b3-15b8-4fab-b06e-171330ee81e2_large/earth-from-space-stockcake.jpg') center/cover; }
+.heroContent { max-width: 600px; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4.5rem); line-height: 1.1; margin: 10px 0; }
+.eyebrow { color: #ffd166; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+.primaryLink { display: inline-block; margin-top: 18px; color: #173042; background: #ffd166; text-decoration: none; }
+.intro, .resultsSection, .pageContent { max-width: 1100px; margin: auto; padding: 55px 5%; }
+.intro { text-align: center; }
+.resultsSection h2 { text-align: center; }
+.resultsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+.resultCard, .teamCard { overflow: hidden; background: white; border-radius: 10px; box-shadow: 0 3px 15px #0002; }
+.resultCard img { width: 100%; height: 190px; object-fit: cover; }
+.resultCard-content { padding: 18px; }
+.resultCard h3 { margin-top: 0; color: #087e8b; }
+.resultCard a { color: #087e8b; font-weight: bold; }
+.teamGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.teamCard { padding: 22px; text-align: center; }
+.contactForm { max-width: 650px; display: grid; gap: 8px; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 3px 15px #0002; }
+.contactForm input, .contactForm textarea { width: 100%; padding: 11px; border: 1px solid #ccd6dc; border-radius: 5px; margin-bottom: 10px; font: inherit; }
+
